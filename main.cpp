@@ -19,18 +19,53 @@ void initGL() {
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Nice perspective corrections
 }
 
+void RenderTableLegs()
+{
+   glBegin(GL_QUADS);                
+      
+      // Right
+      glColor3f(0.5f, 0.1f, 0.5f);     
+      glVertex3f(5.5f, -2.0f, 5.0f);
+      glVertex3f(5.0f, -2.0f, 5.0f);
+      glVertex3f(5.0f, -5.0f,  5.0f);
+      glVertex3f(5.5f, -5.0f,  5.0f);
+
+      // Left
+      glColor3f(0.5f, 0.1f, 0.5f);     
+      glVertex3f(5.5f, -2.0f, 4.5f);
+      glVertex3f(5.0f, -2.0f, 4.5f);
+      glVertex3f(5.0f, -5.0f,  4.5f);
+      glVertex3f(5.5f, -5.0f,  4.5f);
+
+      // Back
+      glColor3f(0.5f, 0.1f, 0.5f); 
+      glVertex3f(5.5f, -2.0f, 5.0f);
+      glVertex3f(5.5f, -2.0f, 4.5f);
+      glVertex3f(5.5f, -5.0f,  4.5f);
+      glVertex3f(5.5f, -5.0f,  5.0f);
+
+      // Front
+      glColor3f(0.5f, 0.1f, 0.5f); 
+      glVertex3f(5.0f, -2.0f, 5.0f);
+      glVertex3f(5.0f, -2.0f, 4.5f);
+      glVertex3f(5.0f, -5.0f,  4.5f);
+      glVertex3f(5.0f, -5.0f,  5.0f);
+
+   glEnd();
+}
+
 void RenderTable()
 { 
    glBegin(GL_QUADS);                
       
-      // Bottom
+      // Top
       glColor3f(0.5f, 0.1f, 0.5f);     
       glVertex3f(10.0f, -1.0f, -2.0f);
       glVertex3f(5.0f, -1.0f, -2.0f);
       glVertex3f(5.0f, -1.0f,  5.0f);
       glVertex3f(10.0f, -1.0f,  5.0f);
 
-      // Top
+      // Bottom
       glColor3f(0.5f, 0.1f, 0.5f);     
       glVertex3f(10.0f, -2.0f, -2.0f);
       glVertex3f(5.0f, -2.0f, -2.0f);
@@ -67,8 +102,33 @@ void RenderTable()
    glEnd();
 
    glColor3f(0.5f, 0.5f, 0.5f);
-   glTranslatef(4.5f, -1.5f, 1.5f); 
-   glutSolidSphere(0.3, 5, 5);
+
+   // Drawer Knob
+   glPushMatrix();
+      glTranslatef(4.5f,-1.5f, 1.5f); 
+      glutSolidSphere(0.3, 5, 5);
+   glPopMatrix();
+
+   //Rendering Legs
+   glPushMatrix();
+      //glTranslatef(0.0f, 0.0f, 0.0f); 
+      RenderTableLegs();
+   glPopMatrix();
+
+   glPushMatrix();
+      glTranslatef(0.0f, 0.0f, -6.5f); 
+      RenderTableLegs();
+   glPopMatrix();
+
+   glPushMatrix();
+      glTranslatef(4.5f, 0.0f, 0.0f); 
+      RenderTableLegs();
+   glPopMatrix();
+
+   glPushMatrix();
+      glTranslatef(4.5f, 0.0f, -6.5f); 
+      RenderTableLegs();
+   glPopMatrix();
 }
  
 /* Handler for window-repaint event. Called back when the window first appears and
@@ -80,7 +140,7 @@ void display() {
    // Render a color-cube consisting of 6 quads with different colors
    glLoadIdentity();                 // Reset the model-view matrix
    glTranslatef(0.0f, 0.0f, -45.0f);  // Move right and into the screen
-   glRotatef(60, 0, 1, 0);
+   glRotatef(45, 0, 1, 0);
    //glRotatef(15, 0, 0, 1);
    //glRotatef(15, 1, 0, 0);
  
