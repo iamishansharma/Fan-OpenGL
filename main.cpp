@@ -131,6 +131,11 @@ void RenderTable()
    glPopMatrix();
 }
  
+void RenderFan()
+{
+   
+}
+
 /* Handler for window-repaint event. Called back when the window first appears and
    whenever the window needs to be re-painted. */
 void display() {
@@ -185,6 +190,8 @@ void display() {
    glEnd();
 
    RenderTable();
+
+   RenderFan();
  
    glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 }
