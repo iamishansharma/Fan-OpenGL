@@ -279,9 +279,7 @@ void processNormalKeys(unsigned char key, int x, int y)
 					break;
 		case 't': 	startFanRotation = false;		// Fan Blades Rotation Stop
 					break;
-		case 'h': 	startLateralMovement = true;	// Lateral movement start
-					break;
-		case 'j': 	startLateralMovement = false;	// Lateral movement stop
+		case 'h': 	startLateralMovement = startLateralMovement ? false : true; // Start Stop for Lateral Movement
 					break;
 		case 'u': 	FanMoveY += 0.05;	// Move Fan Up
 					break;
@@ -291,7 +289,7 @@ void processNormalKeys(unsigned char key, int x, int y)
 					break;
 		case 'r': 	FanMoveX += 0.05;	// Move Fan Right
 					break;
-		case 'o':   OpenDrawer = OpenDrawer == 0.0 ? 0.5 : 0.0;				
+		case 'o':   OpenDrawer = OpenDrawer == 0.0 ? 0.5 : 0.0;		// Drawer Open Close		
 	}
 
 	glutPostRedisplay();
