@@ -150,17 +150,22 @@ void FanBlades()
 void RotatingBody(unsigned int uiStacks, unsigned int uiSlices, float fA, float fB, float fC)
 {	
 	glPushMatrix();
+
+		// Shifting Origin to Point above Piece 4 rotating and shifting back
+		glTranslatef(0.0, 0.0, 0.25);
 		glRotatef(-75, 0, 1, 0);
 		glRotatef(LateralMovement, 0, 1, 0.0);
+		glTranslatef(0.0, 0.0, -0.25);
+
 		// Piece 4
 		glPushMatrix();
-			glTranslatef(0.0, 0.35, 0.15);
+			glTranslatef(0.0, 0.35, 0.35);
 			glScalef(0.15, 0.1, 0.3);
 			glutSolidCube(1);
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(0.0,0.35,0.45);
+			glTranslatef(0.0,0.35,0.65);
 			glRotatef(180,0,1,0);
 			float tStep = (3.14) / (float)uiSlices;	
 			float sStep = (3.14) / (float)uiStacks;	
@@ -201,14 +206,14 @@ void RenderFan()
 
 	// Piece 2
 	glPushMatrix();
-		glTranslatef(0.0, 0.15, 0.1);
-		glScalef(0.2, 0.1, 0.2);
+		glTranslatef(0.0, 0.15, 0.2);
+		glScalef(0.2, 0.1, 0.4);
 		glutSolidCube(1);
 	glPopMatrix();
 
 	// Piece 3
 	glPushMatrix();
-		glTranslatef(0.0, 0.25, 0.15);
+		glTranslatef(0.0, 0.25, 0.35);
 		glScalef(0.1, 0.1, 0.1);
 		glutSolidCube(1);
 	glPopMatrix();
@@ -221,28 +226,57 @@ void RenderFan()
 
 void RenderWalls()
 {
+	// Back Wall
+	glPushMatrix();
+		glTranslatef(0,0,-0.55);
+		glScalef(4, 4, 0.05);
+		glColor3f(1.0,0.0,0.0);
+		glutSolidCube(1);
+	glPopMatrix();
 
+	// Bottom Floor
+	glPushMatrix();
+		glTranslatef(0,-2,1.5);
+		glScalef(4, 0.05, 4);
+		glColor3f(0.0,1.0,0.0);
+		glutSolidCube(1);
+	glPopMatrix();
+
+	// Top Ceiling
+	glPushMatrix();
+		glTranslatef(0,2,1.5);
+		glScalef(4, 0.05, 4);
+		glColor3f(0.0,0.0,1.0);
+		glutSolidCube(1);
+	glPopMatrix();
+
+	// Right Wall
+	glPushMatrix();
+		glTranslatef(2.0,0,1.5);
+		glScalef(0.05, 4, 4);
+		glColor3f(0.5,0.0,0.5);
+		glutSolidCube(1);
+	glPopMatrix();
 }
 
 void display() 
 {
 	GLfloat Pos[] = {0,1,0,1};
-	//GLfloat Col[] = {1,0,0,1};
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity();
 	glLightfv(GL_LIGHT0, GL_POSITION, Pos);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, Col);
 
+	glTranslatef(0,1,0);
 	gluLookAt(Cx,Cy,Cz,0,0,0,0,1,0);
+	//glRotatef(90,0,1,0);
 
-	//glLoadIdentity();
-	//glTranslatef(0.0, -1, 0.0);
+	//RenderWalls();
 
-	//glRotatef(90, 0, 1, 0);
-
+	glTranslatef(0,-1,0);
+	
 	RenderTable();
 
 	glPushMatrix();
