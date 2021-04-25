@@ -13,6 +13,13 @@ char title[] = "Assignment 2 - Ishan Sharma 2016B2A70773P";
 GLfloat Cx = 0;
 GLfloat Cy = 0;
 GLfloat Cz = 3;
+GLfloat FanRotation = 0;
+GLfloat FanMoveX = 0;
+GLfloat FanMoveY = 0;
+GLfloat LateralMovement = 0;
+bool LateralForwardorBackward = true;
+bool startFanRotation = false;
+bool startLateralMovement = false;
  
 /* Initialize OpenGL Graphics */
 void initGL() {
@@ -66,34 +73,74 @@ void RenderTable()
 	glPopMatrix();
 }
 
-void RotatingBody(unsigned int uiStacks, unsigned int uiSlices, float fA, float fB, float fC)
-{	
-	// Piece 4
+void FanBlades()
+{
 	glPushMatrix();
-		glTranslatef(0.0, 0.35, 0.15);
-		glScalef(0.15, 0.1, 0.3);
-		glutSolidCube(1);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(0.0,0.0,0.0);
+			glVertex3f(-0.15, 0.25, 0.0);
+			glVertex3f(0.15, 0.25, 0.0);
+		glEnd();
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(0.0,0.4,0.55);
-		glRotatef(180,0,1,0);
-		float tStep = (3.14) / (float)uiSlices;	
-		float sStep = (3.14) / (float)uiStacks;	
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);	
-		for(float t = -3.14/2; t <= (3.14/2)+.0001; t += tStep)	
-		{		
-			glBegin(GL_TRIANGLE_STRIP);		
-			for(float s = -3.14; s <= 3.14+.0001; s += sStep)		
-			{			
-				glVertex3f(fA * cos(t) * cos(s), fB * cos(t) * sin(s), fC * sin(t));			
-				glVertex3f(fA * cos(t+tStep) * cos(s), fB * cos(t+tStep) * sin(s), fC * sin(t+tStep));		
-			}		
-			glEnd();	
-		}
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glRotatef(120, 0, 0, 1);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(0.0,0.0,0.0);
+			glVertex3f(-0.15, 0.25, 0.0);
+			glVertex3f(0.15, 0.25, 0.0);
+		glEnd();
+	glPopMatrix();
 
-		glutSolidSphere(0.05, 5, 5);
+	glPushMatrix();
+		glRotatef(240, 0, 0, 1);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(0.0,0.0,0.0);
+			glVertex3f(-0.15, 0.25, 0.0);
+			glVertex3f(0.15, 0.25, 0.0);
+		glEnd();
+	glPopMatrix();
+}
+
+void RotatingBody(unsigned int uiStacks, unsigned int uiSlices, float fA, float fB, float fC)
+{	
+	glPushMatrix();
+		glRotatef(-75, 0, 1, 0);
+		glRotatef(LateralMovement, 0, 1, 0);
+		// Piece 4
+		glPushMatrix();
+			glTranslatef(0.0, 0.35, 0.15);
+			glScalef(0.15, 0.1, 0.3);
+			glutSolidCube(1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0.0,0.35,0.45);
+			glRotatef(180,0,1,0);
+			float tStep = (3.14) / (float)uiSlices;	
+			float sStep = (3.14) / (float)uiStacks;	
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);	
+			for(float t = -3.14/2; t <= (3.14/2)+.0001; t += tStep)	
+			{		
+				glBegin(GL_TRIANGLE_STRIP);		
+				for(float s = -3.14; s <= 3.14+.0001; s += sStep)		
+				{			
+					glVertex3f(fA * cos(t) * cos(s), fB * cos(t) * sin(s), fC * sin(t));			
+					glVertex3f(fA * cos(t+tStep) * cos(s), fB * cos(t+tStep) * sin(s), fC * sin(t+tStep));		
+				}		
+				glEnd();	
+			}
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+			glutSolidSphere(0.05, 5, 5);
+
+			glPushMatrix();
+				glRotatef(FanRotation, 0, 0, 1);
+				FanBlades();
+			glPopMatrix();
+
+		glPopMatrix();
+
 	glPopMatrix();
 } 
 
@@ -147,13 +194,14 @@ void display()
 	gluLookAt(Cx,Cy,Cz,0,0,0,0,1,0);
 
 	//glLoadIdentity();
-	glTranslatef(0.0, -1, 0.0);
+	//glTranslatef(0.0, -1, 0.0);
 
 	RenderTable();
 
-	//RenderWalls();
-	//glRotatef(90,0,1,0);
-	RenderFan();
+	glPushMatrix();
+		glTranslatef(FanMoveX, FanMoveY, 0);
+		RenderFan();
+	glPopMatrix();
  
 	glutSwapBuffers();  // Swap the front and back frame buffers (double buffering)
 }
@@ -178,6 +226,23 @@ void processNormalKeys(unsigned char key, int x, int y)
 		case 'q':
 		case 'Q':   exit(0);
 						break;
+		
+		case 's':	startFanRotation = true; 		// Fan Blades Rotation Start
+					break;
+		case 't': 	startFanRotation = false;		// Fan Blades Rotation Stop
+					break;
+		case 'h': 	startLateralMovement = true;	// Lateral movement start
+					break;
+		case 'j': 	startLateralMovement = false;	// Lateral movement stop
+					break;
+		case 'u': 	FanMoveY += 0.05;	// Move Fan Up
+					break;
+		case 'd': 	FanMoveY -= 0.05;	// Move Fan Down
+					break;
+		case 'l': 	FanMoveX -= 0.05;	// Move Fan Left
+					break;
+		case 'r': 	FanMoveX += 0.05;	// Move Fan Right
+					break;
 	}
 
 	glutPostRedisplay();
@@ -186,6 +251,27 @@ void processNormalKeys(unsigned char key, int x, int y)
 void reshape(GLsizei width, GLsizei height) 
 {  
 	
+}
+
+void Spin()
+{
+	if(startFanRotation)
+	{
+		if(FanRotation > 360)
+			FanRotation = 0;
+		else
+			FanRotation += 10;
+	}
+
+	if(startLateralMovement)
+	{
+		if(LateralMovement > 150)
+			LateralMovement = 0;
+		else
+			LateralMovement += 0.6;
+	}
+	
+	glutPostRedisplay();
 }
  
 /* Main function: GLUT runs as a console application starting at main() */
@@ -199,6 +285,7 @@ int main(int argc, char** argv) {
 	initGL();                       // Our own OpenGL initialization
 	glutDisplayFunc(display);       // Register callback handler for window re-paint event
 	glutKeyboardFunc(processNormalKeys);
+	glutIdleFunc(Spin);
 	glutMainLoop();                 // Enter the infinite event-processing loop
 	return 0;
 }
