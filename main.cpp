@@ -29,7 +29,7 @@ void initGL()
 	glEnable(GL_DEPTH_TEST);   
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glFrustum(-1,1,-1,1,1,100);
+	glFrustum(-1,1,-1,1,2,100);
 	glMatrixMode(GL_MODELVIEW);
 
 	glEnable(GL_LIGHTING);
@@ -297,9 +297,17 @@ void processNormalKeys(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
-void reshape(GLsizei width, GLsizei height) 
-{  
-	
+static void resize(int width, int height)
+{
+	const float aspectRatio = (float) width / (float) height;
+
+	glViewport(0, 0, width, height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glFrustum(-aspectRatio, aspectRatio, -1.0, 1.0, 2.0, 100.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 void Spin()
@@ -309,32 +317,41 @@ void Spin()
 		if(FanRotation > 360)
 			FanRotation = 0;
 		else
-			FanRotation += 10;
+			FanRotation += 15;
 	}
 
 	if(startLateralMovement)
 	{
 		if(LateralMovement > 150)
-			LateralMovement = 0;
-		else
+		{
+			LateralForwardorBackward = false;
+			LateralMovement -= 0.6;
+		}
+		else if(LateralMovement < 0)
+		{
+			LateralForwardorBackward = true;
 			LateralMovement += 0.6;
+		}
+		else
+			LateralMovement += LateralForwardorBackward ? 0.6 : -0.6;
 	}
 	
 	glutPostRedisplay();
 }
  
-/* Main function: GLUT runs as a console application starting at main() */
-int main(int argc, char** argv) {
-	glutInit(&argc, argv);            // Initialize GLUT
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // Enable double buffered mode
-	glutInitWindowSize(600, 600);   // Set the window's initial width & height
-	glutInitWindowPosition(100, 150); // Position the window's initial top-left corner
-	glutCreateWindow(title);          // Create window with the given title
-	//glutReshapeFunc(reshape);
-	initGL();                       // Our own OpenGL initialization
-	glutDisplayFunc(display);       // Register callback handler for window re-paint event
+
+int main(int argc, char** argv) 
+{
+	glutInit(&argc, argv);            
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); 
+	glutInitWindowSize(600, 600);   
+	glutInitWindowPosition(100, 150); 
+	glutCreateWindow(title);          
+	glutReshapeFunc(resize);
+	initGL();                       
+	glutDisplayFunc(display);       
 	glutKeyboardFunc(processNormalKeys);
 	glutIdleFunc(Spin);
-	glutMainLoop();                 // Enter the infinite event-processing loop
+	glutMainLoop();                 
 	return 0;
 }
