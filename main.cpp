@@ -20,14 +20,16 @@ GLfloat LateralMovement = 0;
 bool LateralForwardorBackward = true;
 bool startFanRotation = false;
 bool startLateralMovement = false;
+GLfloat OpenDrawer = 0.0;
  
 /* Initialize OpenGL Graphics */
-void initGL() {
+void initGL() 
+{
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);   
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glFrustum(-1,1,-1,1,2,100);
+	glFrustum(-1,1,-1,1,1,100);
 	glMatrixMode(GL_MODELVIEW);
 
 	glEnable(GL_LIGHTING);
@@ -42,6 +44,47 @@ void RenderTableLegs()
 	glPushMatrix();
 		glScalef(0.05, 1, 0.05);
 		glutSolidCube(1);
+	glPopMatrix();
+}
+
+void RenderDrawer()
+{
+	glPushMatrix();
+		glTranslatef(0.0, 0.0, OpenDrawer);
+		glPushMatrix();
+			glScalef(0.5, 0.05, 0.5);
+			glTranslatef(0.0, -4.0, 0.5);
+			glutSolidCube(1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glScalef(0.05, 0.25, 0.5);
+			glTranslatef(4.5, -0.4, 0.5);
+			glutSolidCube(1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glScalef(0.05, 0.25, 0.5);
+			glTranslatef(-4.5, -0.4, 0.5);
+			glutSolidCube(1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glScalef(0.5, 0.25, 0.05);
+			glTranslatef(0, -0.4, 10);
+			glutSolidCube(1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glScalef(0.5, 0.25, 0.05);
+			glTranslatef(0, -0.4, 0);
+			glutSolidCube(1);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(0, -0.1, 0.6);
+			glutSolidSphere(0.05, 5, 5);
+		glPopMatrix();
 	glPopMatrix();
 }
 
@@ -71,6 +114,8 @@ void RenderTable()
 		glTranslatef(-0.5, -0.525, 0.5);
 		RenderTableLegs();
 	glPopMatrix();
+
+	RenderDrawer();
 }
 
 void FanBlades()
@@ -106,7 +151,7 @@ void RotatingBody(unsigned int uiStacks, unsigned int uiSlices, float fA, float 
 {	
 	glPushMatrix();
 		glRotatef(-75, 0, 1, 0);
-		glRotatef(LateralMovement, 0, 1, 0);
+		glRotatef(LateralMovement, 0, 1, 0.0);
 		// Piece 4
 		glPushMatrix();
 			glTranslatef(0.0, 0.35, 0.15);
@@ -196,9 +241,12 @@ void display()
 	//glLoadIdentity();
 	//glTranslatef(0.0, -1, 0.0);
 
+	//glRotatef(90, 0, 1, 0);
+
 	RenderTable();
 
 	glPushMatrix();
+		glTranslatef(0.0, 0.0, -0.5);
 		glTranslatef(FanMoveX, FanMoveY, 0);
 		RenderFan();
 	glPopMatrix();
@@ -243,6 +291,7 @@ void processNormalKeys(unsigned char key, int x, int y)
 					break;
 		case 'r': 	FanMoveX += 0.05;	// Move Fan Right
 					break;
+		case 'o':   OpenDrawer = OpenDrawer == 0.0 ? 0.5 : 0.0;				
 	}
 
 	glutPostRedisplay();
