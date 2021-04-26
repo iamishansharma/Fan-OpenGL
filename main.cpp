@@ -338,7 +338,9 @@ void processNormalKeys(unsigned char key, int x, int y)
 		case 'r': 	FanMoveX += 0.05;	// Move Fan Right
 					break;
 		case 'o':   OpenDrawer = OpenDrawer == 0.0 ? 0.5 : 0.0;		// Drawer Open Close
+					break;
 
+		// Translation
 		case '1': MoveX = MoveX + 0.1;
 					break;
 		case '2': MoveX = MoveX - 0.1;
@@ -351,6 +353,8 @@ void processNormalKeys(unsigned char key, int x, int y)
 					break;
 		case '6': MoveZ = MoveZ - 0.1;
 					break;
+		
+		// Rotation
 		case '7': RotateWRT_X = RotateWRT_X + 5;
 					break;
 		case '8': RotateWRT_X = RotateWRT_X - 5;
