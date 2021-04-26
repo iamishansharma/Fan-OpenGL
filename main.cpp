@@ -82,7 +82,7 @@ void RenderDrawer()
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(0, -0.1, 0.6);
+			glTranslatef(0, -0.1, 0.55);
 			glutSolidSphere(0.05, 5, 5);
 		glPopMatrix();
 	glPopMatrix();
@@ -152,7 +152,7 @@ void RotatingBody(unsigned int uiStacks, unsigned int uiSlices, float fA, float 
 	glPushMatrix();
 
 		// Shifting Origin to Point above Piece 4 rotating and shifting back
-		glTranslatef(0.0, 0.0, 0.25);
+		glTranslatef(0.0, 0.0, 0.30);
 		glRotatef(-75, 0, 1, 0);
 		glRotatef(LateralMovement, 0, 1, 0.0);
 		glTranslatef(0.0, 0.0, -0.25);
@@ -165,22 +165,26 @@ void RotatingBody(unsigned int uiStacks, unsigned int uiSlices, float fA, float 
 		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(0.0,0.35,0.65);
-			glRotatef(180,0,1,0);
-			float tStep = (3.14) / (float)uiSlices;	
-			float sStep = (3.14) / (float)uiStacks;	
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);	
-			for(float t = -3.14/2; t <= (3.14/2)+.0001; t += tStep)	
-			{		
-				glBegin(GL_TRIANGLE_STRIP);		
-				for(float s = -3.14; s <= 3.14+.0001; s += sStep)		
-				{			
-					glVertex3f(fA * cos(t) * cos(s), fB * cos(t) * sin(s), fC * sin(t));			
-					glVertex3f(fA * cos(t+tStep) * cos(s), fB * cos(t+tStep) * sin(s), fC * sin(t+tStep));		
-				}		
-				glEnd();	
-			}
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glTranslatef(0.0,0.35,0.55);
+			// glRotatef(180,0,1,0);
+			// float tStep = (3.14) / (float)uiSlices;	
+			// float sStep = (3.14) / (float)uiStacks;	
+			// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);	
+			// for(float t = -3.14/2; t <= (3.14/2)+.0001; t += tStep)	
+			// {		
+			// 	glBegin(GL_TRIANGLE_STRIP);		
+			// 	for(float s = -3.14; s <= 3.14+.0001; s += sStep)		
+			// 	{			
+			// 		glVertex3f(fA * cos(t) * cos(s), fB * cos(t) * sin(s), fC * sin(t));			
+			// 		glVertex3f(fA * cos(t+tStep) * cos(s), fB * cos(t+tStep) * sin(s), fC * sin(t+tStep));		
+			// 	}		
+			// 	glEnd();	
+			// }
+			// glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glPushMatrix();
+				glScalef(1,1,0.2);
+				glutWireSphere(0.3, 20, 2);
+			glPopMatrix();
 
 			glutSolidSphere(0.05, 5, 5);
 
