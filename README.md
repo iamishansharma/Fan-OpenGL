@@ -37,9 +37,9 @@ YOU CAN WATCH THE (VIDEO DEMO)[https://drive.google.com/file/d/1lw5KlCGdbaKqBWEh
 4. The `u, d, l, r` moves the fan up, down, left and right respectively on the wall the fan is in.
 5. The `o` key opens and closes the drawer of the table.
 6. The `Esc, q and Q` keys can be used to quit the application.
-7. The `x` key is used to move in the positive x perspective direction.
-8. The `X` (Capital x) key is used to move in the negative x perspective direction. 
-9. The `y` key is used to move in the positive y perspective direction.
-10. The `Y` (Capital y) key is used to move in the negative y perspective direction. 
-11. The `z` key is used to move in the positive z perspective direction.
-12. The `Z` (Capital z) key is used to move in the negative z perspective direction. 
+7. The `x` key is used to move in the negative x perspective direction.
+8. The `X` (Capital x) key is used to move in the positive x perspective direction. 
+9. The `y` key is used to move in the negative y perspective direction.
+10. The `Y` (Capital y) key is used to move in the positive y perspective direction. 
+11. The `z` key is used to move in the negative z perspective direction.
+12. The `Z` (Capital z) key is used to move in the positive z perspective direction. 
