@@ -22,6 +22,12 @@ bool LateralForwardorBackward = true;
 bool startFanRotation = false;
 bool startLateralMovement = false;
 GLfloat OpenDrawer = 0.0;
+GLfloat MoveX = 0;
+GLfloat MoveY = 0;
+GLfloat MoveZ = 0;
+GLfloat RotateWRT_X = 0;
+GLfloat RotateWRT_Y = 0;
+GLfloat RotateWRT_Z = 0;
 
 void RenderTableLegs()
 {
@@ -273,6 +279,12 @@ void display()
 	glLoadIdentity();
 
 	glTranslatef(0,1,0);
+
+	glTranslatef(MoveX, MoveY, MoveZ);
+	glRotatef(RotateWRT_X, 1, 0, 0);
+	glRotatef(RotateWRT_Y, 0, 1, 0);
+	glRotatef(RotateWRT_Z, 0, 0, 1);
+
 	gluLookAt(Cx,Cy,Cz,0,0,0,0,1,0);
 
 	RenderWalls();
@@ -325,7 +337,32 @@ void processNormalKeys(unsigned char key, int x, int y)
 					break;
 		case 'r': 	FanMoveX += 0.05;	// Move Fan Right
 					break;
-		case 'o':   OpenDrawer = OpenDrawer == 0.0 ? 0.5 : 0.0;		// Drawer Open Close		
+		case 'o':   OpenDrawer = OpenDrawer == 0.0 ? 0.5 : 0.0;		// Drawer Open Close
+
+		case '1': MoveX = MoveX + 0.1;
+					break;
+		case '2': MoveX = MoveX - 0.1;
+					break;
+		case '3': MoveY = MoveY + 0.1;
+					break;
+		case '4': MoveY = MoveY - 0.1;
+					break;
+		case '5': MoveZ = MoveZ + 0.1;
+					break;
+		case '6': MoveZ = MoveZ - 0.1;
+					break;
+		case '7': RotateWRT_X = RotateWRT_X + 5;
+					break;
+		case '8': RotateWRT_X = RotateWRT_X - 5;
+					break;
+		case '9': RotateWRT_Y = RotateWRT_Y + 5;
+					break;
+		case '0': RotateWRT_Y = RotateWRT_Y - 5;
+					break;
+		case '-': RotateWRT_Z = RotateWRT_Z + 5;
+					break;
+		case '=': RotateWRT_Z = RotateWRT_Z - 5;
+					break;		
 	}
 
 	glutPostRedisplay();

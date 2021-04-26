@@ -29,17 +29,32 @@ run for that please run the following command in the terminal - `sudo chmod u+r+
 IF YOU HAVE TOO MANY PROBLEMS RUNNING OR COMPILING, 
 YOU CAN WATCH THE (VIDEO DEMO)[https://drive.google.com/file/d/1lw5KlCGdbaKqBWEhT4a5fmDKe55WIQZh/view?usp=sharing] OF THE PROJECT. 
 
-## How to Interact
+## How to Interact and Key Bindings
 
 1. The `s` key starts the spinning of the fan blades.
 2. the `t` key stops the spinning of the fan blades.
 3. The `h` toggles the Lateral Movement of the fan. (Press `h` again to stop it)
 4. The `u, d, l, r` moves the fan up, down, left and right respectively on the wall the fan is in.
-5. The `o` key opens and closes the drawer of the table.
-6. The `Esc, q and Q` keys can be used to quit the application.
-7. The `x` key is used to move in the negative x perspective direction.
-8. The `X` (Capital x) key is used to move in the positive x perspective direction. 
-9. The `y` key is used to move in the negative y perspective direction.
-10. The `Y` (Capital y) key is used to move in the positive y perspective direction. 
-11. The `z` key is used to move in the negative z perspective direction.
-12. The `Z` (Capital z) key is used to move in the positive z perspective direction. 
+5. The `Esc, q and Q` keys can be used to quit the application.
+6. The `x` key is used to move in the negative x perspective direction.
+7. The `X` (Capital x) key is used to move in the positive x perspective direction. 
+8. The `y` key is used to move in the negative y perspective direction.
+9. The `Y` (Capital y) key is used to move in the positive y perspective direction. 
+10. The `z` key is used to move in the negative z perspective direction.
+11. The `Z` (Capital z) key is used to move in the positive z perspective direction.
+
+Some Extra Features -
+
+12. The `o` key opens and closes the drawer of the table.
+13. The `1` translates observer in positive X axis.
+14. The `2` translates observer in negative X axis.
+15. The `3` translates observer in positive Y axis.
+16. The `4` translates observer in negative Y axis.
+17. The `5` translates observer in positive Z axis.
+18. The `6` translates observer in negative Z axis.
+13. The `7` rotates observer with respect to X axis counterclockwise.
+13. The `8` rotates observer with respect to X axis clockwise.
+13. The `9` rotates observer with respect to Y axis counterclockwise.
+13. The `0` rotates observer with respect to Y axis clockwise.
+13. The `-` rotates observer with respect to Z axis counterclockwise.
+13. The `=` rotates observer with respect to Z axis clockwise.
