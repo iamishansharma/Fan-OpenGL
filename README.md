@@ -1,5 +1,7 @@
 # Fan-OpenGL
 
+Assignment 2 by Ishan Sharma - 2016B2A70773P for Computer Graphics ISF311
+
 Programming Language Used: C++;
 
 So as required, I have developed the simulation of the wall fan.
@@ -23,6 +25,9 @@ run for that please run the following command in the terminal - `sudo chmod u+r+
 (Enter your password if prompted to).
 
 3. Now simply run the command `./Fan.sh` to run the shell script.
+
+IF YOU HAVE TOO MANY PROBLEMS RUNNING OR COMPILING, 
+YOU CAN WATCH THE (VIDEO DEMO)[https://drive.google.com/file/d/1lw5KlCGdbaKqBWEhT4a5fmDKe55WIQZh/view?usp=sharing] OF THE PROJECT. 
 
 ## How to Interact
 
