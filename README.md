@@ -36,6 +36,9 @@ YOU CAN WATCH THE (VIDEO DEMO)[https://drive.google.com/file/d/1lw5KlCGdbaKqBWEh
 3. The `h` toggles the Lateral Movement of the fan. (Press `h` again to stop it)
 4. The `u, d, l, r` moves the fan up, down, left and right respectively on the wall the fan is in.
 5. The `Esc, q and Q` keys can be used to quit the application.
+
+The following keys change the position of the camera in the gluLookAt() function hence helps in changing perspective - 
+
 6. The `x` key is used to move in the negative x perspective direction.
 7. The `X` (Capital x) key is used to move in the positive x perspective direction. 
 8. The `y` key is used to move in the negative y perspective direction.
