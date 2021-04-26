@@ -31,12 +31,13 @@ void initGL()
 	glLoadIdentity();
 	glFrustum(-1,1,-1,1,2,100);
 	glMatrixMode(GL_MODELVIEW);
-
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 
-	//glColorMaterial(GL_FRONT, GL_DIFFUSE);
-	//glEnable(GL_COLOR_MATERIAL);
+	float dif[] = {1.0,1.0,1.0,1.0};
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, dif);
+    float amb[] = {0.2,0.2,0.2,1.0};
+    glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
 }
 
 void RenderTableLegs()
@@ -90,8 +91,11 @@ void RenderDrawer()
 
 void RenderTable()
 { 
+	float difamb[] = {1.0,0.5,0.3,1.0};
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, difamb);
+
 	glPushMatrix();
-		glScalef(1, 0.05, 1);
+		glScalef(1.1, 0.05, 1.1);
 		glutSolidCube(1);
 	glPopMatrix();
 
@@ -200,6 +204,9 @@ void RotatingBody(unsigned int uiStacks, unsigned int uiSlices, float fA, float 
 
 void RenderFan()
 {
+	float difamb[] = {0.5,0.0,0.5,0.1};
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, difamb);
+
 	glTranslatef(0.0, 0.5, 0);
 
 	// Piece 1
@@ -230,6 +237,9 @@ void RenderFan()
 
 void RenderWalls()
 {
+	float difamb[] = {0.0,0.5,0.5,1.0};
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, difamb);
+
 	// Back Wall
 	glPushMatrix();
 		glTranslatef(0,0,-0.55);
@@ -237,6 +247,9 @@ void RenderWalls()
 		glColor3f(1.0,0.0,0.0);
 		glutSolidCube(1);
 	glPopMatrix();
+
+	float difamb1[] = {0.0,1.0,0.0,1.0};
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, difamb1);
 
 	// Bottom Floor
 	glPushMatrix();
@@ -246,6 +259,9 @@ void RenderWalls()
 		glutSolidCube(1);
 	glPopMatrix();
 
+	float difamb2[] = {0.0,0.0,1.0,1.0};
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, difamb2);
+
 	// Top Ceiling
 	glPushMatrix();
 		glTranslatef(0,2,1.5);
@@ -254,9 +270,12 @@ void RenderWalls()
 		glutSolidCube(1);
 	glPopMatrix();
 
+	float difamb3[] = {0.5,0.5,0.0,1.0};
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, difamb3);
+
 	// Right Wall
 	glPushMatrix();
-		glTranslatef(2.0,0,1.5);
+		glTranslatef(2.0,0,1.4);
 		glScalef(0.05, 4, 4);
 		glColor3f(0.5,0.0,0.5);
 		glutSolidCube(1);
@@ -266,18 +285,22 @@ void RenderWalls()
 void display() 
 {
 	GLfloat Pos[] = {0,1,0,1};
+	//GLfloat Col1[]= {0,0.5,0.5,0.2};
+	//GLfloat Col2[]= {1,0,0,0.2};
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity();
-	glLightfv(GL_LIGHT0, GL_POSITION, Pos);
+	//glLightfv(GL_LIGHT0, GL_POSITION, Pos);
+	//glLightfv(GL_LIGHT0, GL_DIFFUSE, Col1);
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, Col2);
 
 	glTranslatef(0,1,0);
 	gluLookAt(Cx,Cy,Cz,0,0,0,0,1,0);
 	//glRotatef(90,0,1,0);
 
-	//RenderWalls();
+	RenderWalls();
 
 	glTranslatef(0,-1,0);
 	
