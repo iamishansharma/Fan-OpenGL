@@ -1,10 +1,14 @@
 # Fan-OpenGL
 
+Programming Language Used: C++;
+
 So as required, I have developed the simulation of the wall fan.
 As another object, I have made a simple table to go with it. 
 This table has an openable drawer. See below on more details.
 
 ## Dependencies
+
+Make sure you have C/C++ installed on your system.
 
 1. This program was built and tested using a Ubuntu (Linux) OS only. 
 2. Make sure to run the command `sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev` to install all dependencies.
