@@ -15,7 +15,7 @@ This table has an openable drawer. See below on more details.
 but I have made a shell script that will clean, compile and run in just 1 command. 
 
 2. Before that, make sure the shell script has permission to 
-run for that please run the following command in the terminal - `chmod u+r+x Fan.sh`
+run for that please run the following command in the terminal - `sudo chmod u+r+x Fan.sh`
 (Enter your password if prompted to).
 
 3. Now simply run the command `./Fan.sh` to run the shell script.
